@@ -1,0 +1,58 @@
+<template>
+    <view class="wp-progress" style="height:{{prowidth}}rpx;border-radius:{{prowidth/2}}rpx;background-color:{{bgcolor}};">
+        <view wx:if="{{isDouble==1}}" class="wp-progress-child" style="height:{{prowidth}}rpx;border-radius:{{prowidth/2}}rpx;width:{{percent}}%;background-color:{{childbgc[0]}};"></view>
+        <view wx:if="{{isDouble==2}}" class="wp-progress-child" style="height:{{prowidth}}rpx;border-radius:{{prowidth/2}}rpx;width:{{percent}}%;background-image:linear-gradient(to right,{{childbgc[0]}},{{childbgc[1]}});"></view>
+    </view>
+  
+</template>
+<script>
+import wepy from "wepy"
+export default class Wpprogress extends wepy.component{
+      
+     data = {
+         isDouble:1,
+        }
+  
+        props = {
+            
+            percent:{},
+            
+            childbgc:{},
+
+            prowidth:{},
+
+            bgcolor:{}
+        }
+
+         onLoad () {
+           console.log(this.percent)
+           console.log(this.prowidth)
+           this.isDouble = this.checkChildbgc()
+        }
+
+        checkChildbgc(){
+            if(this.childbgc[1]){
+                return 2;
+            }
+            else{
+                return 1;
+            }
+        }
+   }
+</script>
+<style>
+.wp-progress{
+    width: 100%;
+    height: 16rpx;
+    background-color:#e5e5e5;
+    border-radius: 8rpx;
+}
+
+.wp-progress-child{
+    height: 100%;
+    
+    border-radius: 8rpx;
+    background-color:#233333;
+}
+
+</style>

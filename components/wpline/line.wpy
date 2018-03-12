@@ -1,0 +1,36 @@
+<style>
+.elip {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .elip--multiple {
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+  }
+</style>
+
+<template>
+  <view class="elip {{line > 1 ? 'elip--multiple' : ''}}" style="{{line > 1 ? '-webkit-line-clamp:' + line + ' ;' : ''}}">
+     <slot></slot>
+  </view>
+</template>
+
+<script>
+   import wepy from "wepy"
+   export default class Line extends wepy.component{
+       data = {
+        }
+
+        props = {
+           line: {      
+            }
+        }
+
+        onLoad () {
+            console.log('pppp',this.line)
+        }
+   }
+
+</script>

@@ -1,0 +1,71 @@
+<style>
+  @keyframes sb
+    {
+      to {
+        transform: scale(7);
+        opacity: 0;
+      }
+    }
+    .fu{
+        height: inherit;
+        width: inherit;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .do{
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      opacity:0;
+      border-radius: 50%;
+      transform: scale(0);
+      background-color: #fafafa;
+      opacity: 1;
+      animation: sb .65s;
+    }
+</style>
+
+<template>
+    <view  class="fu" @tap="water_click">
+        <view id="" class="{{water_group.sb}}" @animationend="water_stopsb" style="top:{{sb_y}}px;left:{{sb_x}}px;"></view>
+    </view>
+</template>
+<script>
+  import wepy from "wepy"
+   export default class Wpwater extends wepy.component{
+       data = {
+        sb_x:0,
+        sb_y:0,
+        
+        
+        }
+         props = {
+             water_group:{}
+         }
+
+       methods = {
+         water_click(e) {
+          if(this.water_group.flag){
+           this.water_group.sb ='do';
+           this.water_group.flag = false;
+
+           let offx = e.target.offsetLeft;
+           let offy = e.target.offsetTop
+           this.sb_x = e.detail.x-offx-5;
+           this.sb_y = e.detail.y-offy-5;
+          }else{
+            return ;
+          }
+         
+
+        },
+        water_stopsb(){
+          this.water_group.sb ='';
+          this.water_group.flag = true;
+        }
+
+       
+    }
+   }
+</script>

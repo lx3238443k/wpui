@@ -1,0 +1,65 @@
+<style>
+    .notice{
+        display: inline-block;
+        min-width: 19rpx;
+        height: 30rpx;
+        line-height: 30rpx;
+        padding: 0 6rpx;
+        font-size: 22rpx;
+        text-align: center;
+        font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        color: #FFF;
+        background: #f5342f;
+        border-radius: 18rpx;
+        overflow: hidden;
+    }
+
+    .notice-point{
+        /* min-width: auto; */
+        width: 16rpx;
+        height: 16rpx;
+        padding: 0;
+        border-radius: 50%;
+    }
+
+  
+</style>
+
+<template>
+    <view class='notice notice-{{type}}'>
+        <slot wx:if="{{!value && type !== 'point'}}"></slot>
+        {{value && type !== 'point'? value :''}}
+    </view>
+</template>
+
+<script>
+   import wepy from "wepy"
+   export default class Wpnotice extends wepy.component{
+       data = {
+        
+        }
+
+        props = {
+          type:{},
+          max:{},
+          value:{}
+        }
+        attached(){
+            let home =this;
+            let max = parseInt(home.max,10);
+            let value = parseInt(home.value,10);
+
+            if(value && max && value > max){
+                
+                    this.value = max + '+'
+               
+            }   
+        }
+        onLoad(){
+            this.attached();
+        }  
+   }
+
+</script>
